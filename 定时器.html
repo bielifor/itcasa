@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div,
+        span {
+            float: left;
+        }
+
+        div {
+            width: 50px;
+            height: 50px;
+            background: darkred;
+            font: bold 22px/50px '宋体';
+            text-align: center;
+            color: #fff;
+        }
+
+        span {
+            width: 20px;
+            height: 50px;
+            font: bold 18px/50px '宋体';
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <span>:</span>
+    <div></div>
+    <span>:</span>
+    <div></div>
+</body>
+<script>
+    function fn(date) {
+        var start = new Date()
+        var end = new Date(date)
+        var temp = end - start
+        var h = parseInt(temp / 1000 / 60 / 60)
+        h = h < 10 ? '0' + h : h
+        var m = parseInt(temp / 1000 / 60 % 60)
+        m = m < 10 ? '0' + m : m
+        var s = parseInt(temp / 1000 % 60)
+        s = s < 10 ? '0' + s : s
+        return { hour : h, min : m, second: s } 
+    }
+    function fn1() {
+        var date = fn('2019-1-30 10:10:10')
+        var divs = document.querySelectorAll('div')
+        divs[0].innerText = date.hour
+        divs[1].innerText = date.min
+        divs[2].innerText = date.second
+    }
+    setInterval(fn1, 10)
+    // 注意定时其中的setInterval第一个参数如果是函数名称的话不要加括号 如果加了括号之后它之后执行一次因为该函数没有返回值执行后返回的是undefined
+</script>
+</html>
