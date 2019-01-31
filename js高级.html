@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        this 指向的问题
+
+            函数中 this 的指向不是在函数创建时决定的, 而是  在函数执行时决定的
+            普通函数中 this 指向 window
+            构造函数中 this 指向 所创建的实例对象
+            定时器中的 this 指向 window
+            对象方法中的 this 指向调用者
+            事件处理程序中的 this 指向事件源  
+
+        原型及原型链  
+
+            实例对象在去调用一个属性或方法时,会先从自身中查找,若自身中没有找到这个方法,则会通过 _proto_ 去自身的原型中去查找,若原型中没有,则会继续通过_proto_ 向原型的原型去查找,直到找到Object祖宗类,之所以可以这么查找,就是因为原型链的存在
+        
+        继承
+
+            原型继承:
+                更改子类的原型的指向(给子类的原型重新赋值)
+                继承的方法是有意义的
+                继承的属性是没有意义的
+            借用继承:
+                函数名: 函数名.call(调用者, 参数1, 参数2)
+                该函数会立即执行, 但是函数体内的 this 会指向借用者, 这就是借用
+                仅仅借用了属性但是方法没有借用                
+            拷贝继承:
+
+                把对象A中的属性和方法复制一份新的给对象B
+                function copy(parentObj,childObj) {
+                  for (var key in parentObj) {
+                    if (childObj[key] == undefined) {
+                      // 没有
+                      childObj[key] = parentObj[key];
+                    }
+                  }
+                }
+
+                深拷贝: 递归 
+
+            组合继承:
+                原型 + 借用 组合继承
+
+            递归: 
+                调用自身的编程技巧成为递归
+                条件
+                    递归前进段
+                    边界条件
+                    递归返回段
+                //     案例2：1,1,2,3,5,8..........求第n个数是多少 斐波那列 用递归实现【可选】
+
+                // > 规律：当前位置的数字和 = 前两个数字的总和（2 = 1 + 1）
+
+                function getSum(n) {
+                  if (n == 1 || n == 2) {
+                    return 1;
+                  } else {
+                    return getSum(n - 1) + getSum(n - 2);
+                  }
+                }
+            
+            闭包: 
+                闭包就是可以读取其他函数内部变量的函数
+                可以延长变量的生命周期
+
+                例1：闭包经典案例，在页面上有一组元素（如按钮），点击哪个元素就显示哪个元素的索引  
+            var btns = document.querySelectorAll('button');
+            for (var i = 0; i < btns.length; i++) {
+              (function (i) {
+                // var i
+                btns[i].onclick = function () {
+                  alert(i);
+                }
+              })(i);
+            }
+    </script>
+</body>
+
+</html>
